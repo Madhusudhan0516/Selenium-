@@ -1,1 +1,4 @@
 Hi that selenium notes
+Locaters
+alerts
+
