@@ -2,3 +2,4 @@ Hi that selenium notes
 Locaters
 alerts
 swiching commands
+alerts
