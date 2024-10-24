@@ -1,0 +1,627 @@
+https://demo.automationtesting.in/Index.html
+1. `get() method loads a new webpage.
+
+2. `findElement()` finds a single web element.
+
+3. `findElements()` retrieves a list of elements.
+
+4. `click()` simulates a mouse click action.
+
+5. `sendKeys()` types text into input fields.
+
+6. 'getText() fetches visible text from elements.
+
+7. `getAttribute()` retrieves a specific attribute value.
+
+8. 'getTitle()` returns the current webpage title.
+
+9. 'getCurrentUrl() gets the URL of the page.
+
+10. navigate().to()` navigates to a specified URL.
+
+11. 'navigate().back()` moves to the previous page.
+
+12. 'navigate().forward()` moves to the next page.
+
+13. 'navigate().refresh()` reloads the current page.
+
+14. `switchTo().frame() switches to an iframe.
+
+15. 'switchTo().window()` changes the active window.
+
+16. 'switchTo().alert() handles JavaScript alerts.
+
+17. `manage().window().maximize() maximizes the browser window.
+
+18. 'manage().timeouts().implicitly Wait() sets implicit wait time.
+
+19. 'quit() closes all browser windows and quits.
+
+20. `close() closes the current browser window.
+
+
+1.Difference between Linktext and Partiallink text.
+2.Difference between findElement() and findElements().
+-> findElement()  - locate single webelement.
+-> findElements() - locate multiple webelements.
+
+Scenario 1: Locator matching with single webelemnt.
+findElement(Locator) 
+	      -> It locate single webelement.
+	      -> Return type is Webelement.
+findElements(Locator)
+	      -> It also locate single webelement.
+	      -> Return type is List<Webelement>.
+
+Scenario 2: Locator matching with multiple webelements.
+findElement(Locator) 
+	      -> It locate first element in multiple weblelements or locate single webelement.
+	      -> Return type is Webelement.
+findElements(Locator)
+	      -> It also locate multuple webelement.
+	      -> Return type is List<Webelement>.
+Scenario 3: Locator not matching with any webelement or webelements
+findElement(Locator)
+	      -> It gives an exception that is No Such Element Exception
+findElements(Locators)
+	      -> It will not throw any exception. But it return 0
+----------------------------------------------------------------------------------
+---> //: denotes the current node
+---> tagname: denotes the tag name of the current node
+---> @: denotes the Select attribute
+---> Attribute: denotes the attribute of the node
+---> Value: denotes the value of the chosen attribute
+----------------------------------------------------------------------------------------
+3. Types of xpath? which xpath we can prefered.
+	xpath is divided into 2 types
+	1.Absolute xpath
+	2.Relative xpath
+    We can prefer "relative xpath". Beacuse absolute xpath start with root node and it will check
+   each node to find element.In case we can change one element or add one element in the web page absolute xpath
+   is bracked or navigation can not reach to the element.
+
+4. Difference between absolute xpath and relative xpath.
+  1.	Absolute xpath starts with /  --> represents root node
+	Relative xpath strats with // --> represents any node
+ 
+  2.    Absolute xpath do not have attributes
+	Relative xpath works with attribute
+	
+  3.	Absolute xpath goes each node till it finds element
+	Relative xpath directly jumps and find element by using attribute
+--------------------------------------------------------------------------------------------------------
+* xpath creation syntax
+	//tagname[@attribute='vlaue'] or //*[@attribute='value']
+
+* Xpath with single attribute
+	driver.findElement(By.xpath("//tagname[@attribute='Value']"));
+
+* Xpath with multiple attribute
+	driver.findElement(By.xpath("//tagname[@attribute='Value'][@attribute='Value']"));
+
+* Xpath with "AND" operator
+	//tagname[@attribute='value' and @attribute='value']
+
+* Xpath with "OR" operator
+	//tagname[@attribute='value' or @attribute='value']
+
+* Xpath using inner text - By using "text()" we write xpath for using inner text
+  instead of text() we can use " . " (dot) it is acceptable
+//tagname[text()='innertext']
+ex:
+//a[text()='Desktops']
+
+5. Difference between innertext and linktext
+	all the linktexts are inner texts but inner texts are not link texts
+--> using <a> tag we have some text it is Link text and inner text
+--> using any element(h1,h2,h3---h6 etc) have text thats is inner text 
+
+ex: <a href="https://xyz.com"> Click me </a> -- this is linktext or innertext
+ex: <div>welcome</div> -- innertext
+
+* Xpath with contains():- It is no need to specify complete value of the attribute
+	//tagname[contains(@attribute,'partial value')]
+
+* Xpath with Starts-with()
+	//tagname[starts-with(@attribute,'Starting value')]
+
+Handling the dynmaic attributes: we can handle dynamic attributes in some ways, There are
+1. using "OR" operator --> //*[@id='start' or @id='stop']
+2. containes() --> //*[conatines(@id,'st')]
+3. Starts-with() --. //*[starts-with(@id,'st')]
+we can use text() in contains() and strts-with() we can handle dynamic attributes by using linktext and inner text only
+
+* chained xpath: It is combination absolute and relative xpath. It goes top to bottom only.
+--> In this xpath one element don't have any attributes then we can use parent element attributes. Then we can locate element
+by using parent element.
+ex: //div[@id='logo']/a/img
+  
+
+6. Difference between css and xpath 
+
+css have only topdown approach and have one direction 
+xpath have multidirectional. Xpath can have get the element all the directions.
+
+* Xpath Axes
+1. Self
+2. parent
+3. child
+4. ancestor
+5. descendent
+6. following
+7. preceding
+8. following-sibling
+9. preceding-sibling
+* Locating self
+Syntax
+	xpath/self::a
+
+1. Locating a parent element 
+Syntax:
+1. //tagname[@attribute='vlaue']/parent::elementname or tagname
+2. //tagname[@attribute='vlaue']/parent::*
+3. //tagname[@attribute='vlaue']/..
+
+2. Locating a child element 
+Syntax
+1. //tagname[@attribute='vlaue']/Child::elementname or tagname
+2. //tagname[@attribute='vlaue']/child::*
+3.  //tagname[@attribute='vlaue']/tagname
+
+3.Locating grand children
+Syntax
+1. //<xpath>/*/<element name>
+2.//<xpath>/child tag/grand child tag
+
+4. Locating ancestors of known element
+Syntax
+1.xpath/anscestor::tag name
+2.xpath/anscestor::*
+
+5. Locating Descendants of known element
+1.xpath/descendent::input
+2.xpath//input
+
+6. Locating Following elements
+Syntax
+1.xpath/following::tagname
+2.xpath/following::*
+
+we can use last() and first()
+ex:
+1. xpath/following::tagname[first()]
+2. xpath/following::tagname[last()]
+
+7. Locating Preceding elemnt
+Syntax
+1. xpath/presceding:: element
+2. xpath/presceding::*
+
+8. Locating following sibling
+Syntax
+1. xpath/following-sibling::<elementname>
+2. xpath/ollowing-sibling::*
+
+9. Locating Preceding sibling 
+Syntax:
+1. xpath/preceding-sibling::tagname
+2. xpath/preceding-sibling::*
+
+WebDriver Methods:-
+1. Get methods
+2. Conditional methods
+3. Browser methods
+4. Navigational methods
+5. wait methods
+
+1. Get methods: we can access these methods to perform operations in webpages
+1. get(url)- open the url on the browser
+2. getTitle()- returns title of the page
+3. getCurrentUrl()- returns URL of the page
+4. getPageSource()- return source code of the page
+5. getWindowHandle()- returns ID of the single browser window
+6. getWindowHandles()- returns ID's of the multiple browser windows
+
+* Difference Between getWindowHandle() and getWindowHandles()
+
+2. Conditional methods- we access these commands thorugh webelement
+These commands returns boolean value(true/false)
+1. isDisplayed()
+2. isEnabled()
+3. isSelected()
+
+3. Browser Methods:
+1. close()- close single browser
+	In case we can open multiple browsers but we can use close() it close one browser and it colses 
+	parent or first browser.
+	Driver only focused parent window 
+2. quit() - close Multiple browsers
+
+4. Wait commands:
+We can use these commands to avid synchronization problem.
+Thread.sleep() is java method not webdriver method.
+1. implicit wait
+2. explicit wait/ fluent wait
+
+1. NoSuchElementException-Locator is correct but Synchronization problem
+2. ElementNotFoundException- Locator is in-correct
+
+
+sleep()
+Advantages:
+1. Easy to use
+
+DisAdvantages:
+1. If the time is not suffitient then you will get exception 
+2. If will wait for maxiam time out. This will reduce The Performance script
+3.Write in multiple times
+
+
+
+Implicit Wait:
+
+    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+
+Advantages:
+1. single time/ one statement
+2. It will not wait till maximum time if the element is available
+3. applicable for all the elements
+4. easy to use
+
+DisAdvantages:
+1. If the time is not suffitient then you will get exception
+
+ExplicitWait:
+Declaration:
+WebDriverWait mywait = new WebDriverWait(driver,Duration.ofSeconds(10));
+
+use:
+WebElement variablename=mywait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+
+Conditions
+alertIsPresent()
+elementSelectionStateToBe()
+elementToBeClickable()
+elementToBeSelected()
+frameToBeAvaliableAndSwitchToIt()
+invisibilityOfTheElementLocated()
+invisibilityOfElementWithText()
+presenceOfAllElementsLocatedBy()
+presenceOfElementLocated()
+textToBePresentInElement()
+textToBePresentInElementLocated()
+textToBePresentInElementValue()
+titleIs()
+titleContains()
+visibilityOf()
+visibilityOfAllElements()
+visibilityOfAllElementsLocatedBy()
+visibilityOfElementLocated()
+
+FluentWait:
+Declaration:
+Wait<WebDriver> mywait = new FluentWait<WebDriver>(driver)
+	.withTimeout(Duration.ofSeconds(30))
+	.pollingEvery(Duration.ofSeconds(5))
+	.ignoring(NoSuchElementException.class);
+use:
+
+WebElement textusername = mywait.util(new Function<WebDriver, WebElement>(){
+public WebElement apply(WebDriver driver){
+	return driver.findElement(By.xpath("//input[@placeholder='UserName']"));
+});
+
+5. Navigational methods
+1.navigate().to()
+2.navigate().back()
+3.navigate().forward()
+4.navigate().refresh()
+
+* difference between get(url) and navigate().to(url)
+get(url)- get method accept only string format
+navigate().to(url)- this method accepts string format and we can pass url through object also
+
+** driver.swithTo().Window(Window Id)
+getwindowhandle and getwindow handles we can use swith to multiple browser windows
+
+** how to perform operation in single page or multiple pages
+** how to close single web page in multiple multiple pages 
+
+Checkboxes:
+
+
+alerts/ popups:
+alerts are three types:
+1. normal alerts
+2. confirmational alert
+3. prompting alert
+
+We can use to switchTo().alert(). Then we can switch to alert window
+
+accept()- close alert click on ok button
+-->driver.switchTo().alert().accept()
+dismiss()-  close alert click on cancel button
+-->driver.switchTo().alert().dismiss()
+
+** without using switching command we can handle alerts by using explicit wait is another type we can handle the alerts
+
+** 4. Authenticated popup:
+->we can use injected process we can handle the alert.
+-> we can injected user information along the url
+ we have one syntax
+http://username:password@sitename
+
+
+Frames/ iframes:
+* Difference between frame and iframe
+iframe : collection of multiple frames put in one web page
+
+There are some ways to switch to frame
+1.driver.switchTo().frame(name)
+2.driver.switchTo().frame(id)
+3.driver.switchTo().frame(WebElement)
+4.driver.switchTo().frame(index)
+
+
+driver.switchTo().defaultContent();
+It is use go back to web page
+
+3 types of Switching methods
+1.Browser windows
+	driver.switchTo().window(Windowid/window handle)
+2.Alerts
+	driver.switchTo().alert();
+	driver.switchTo().alert().accept();
+	driver.switchTo().alert().dismiss();
+3.Frames
+1.driver.switchTo().frame(name)
+2.driver.switchTo().frame(id)
+3.driver.switchTo().frame(WebElement)
+4.driver.switchTo().frame(index)
+
+Dropdown Box
+It is three types:
+1. Select Dropdown
+2. Bootstramp dropdown
+3. hidden dropdown
+
+1. Select Dropdown:-
+In this select class used 
+
+In this three ways to find out dropdown
+1.selectByVisibleText()
+2.selectByValue()
+3.selectByIndex()
+
+getOptions()- is one of the method to capture how namy values in the dropdown
+
+2. Bootstramp dropdown:
+It don't have any built in methods
+
+3. hidden dropdown:
+
+4. AutoSuggested Dropdown
+Example like a Google search
+
+Web Tables
+* How to handle Web Tables:
+Type of Web tables
+1. static web table
+2. Dynamic web table
+3. table with pagination
+
+1. Static web table:
+* In web page have multiple web tables we can use Xpath
+ex: driver.findElements(By.xpath("Locater"))
+* In web page have single web table then we can use tagname 
+ex: driver.findElements(By.tagName("Locater"))
+
+-- Find total number of rows in the table
+-- Find total number of columns in the table
+-- Read data from specific row and column
+-- Read data from all the rows and columns
+-- print book names whose author is mukesh
+-- Find total price of all the books
+
+2. Dynamic web table With pagination:
+* First find total number of pages
+* Click each and every page till last page 
+* read the data in certain page
+
+Date Pickers/ calenders:
+We can validate dates or calenders in two ways
+1. By using sendKeys()
+2. By using Datepickers
+
+Mouse Actions:
+
+To perform mouse actions selenium provided a prefined class.
+That class name is Actions class
+
+Types Mouse actions
+1. Mouse hover ---- moveToElement(element)
+2. Right click ---- contextClick(element)
+3. double click---- doubleClick()
+4. drag and drop ---- dragAndDrop(Source element, target element)
+
+build()  - create an action
+perform() - complete an action and create an action it works both
+
+** what is the difference between build().perform() and perform()
+build().perform()- create an action and immediately perform or completing
+
+perform()- that action build internally and immediately perform it
+ 
+When do you use build().perform()
+create a action and perform the action after some time.
+we can store the action in one variable and perform after some time
+
+When do you use perform()
+create the action and perform the action immediately by using perform()
+
+** what is the difference between getText() and getAttribute("attribute")
+Ex:- <input id="XYZ"> Welcome </input>
+getText() - returns the inner text of the webelement --> Welcome
+getAttribute("id") - returns the value of attribute of the element --> XYZ 
+
+** Difference between Actions and Action
+Actions -- it is a class and it will be used to perform mouse actions.
+Action -- it is a interface and it will be stored creating actions.
+
+Slider:
+ dragAndDropBy(Element, x, y)
+  getLocation()- we can use find out location of webelement by ising x and y axces
+
+Keyboard Actions:
+
+keyDown(Keys.keyname)
+keyUp(Keys.keyname)
+
+** In click() method we can use through webelement class no need to pass any perameters
+
+** In click() method we can use through Actions class we can pass perameters 
+
+** driver.switchTo().newWindow(WindowType.TAB)
+It is opened in new tab
+It is used selenium4 onwords before this is not there
+
+** driver.switchTo().newWindow(WindowType.Window)
+It is opened in new Window
+It is used selenium4 onwords before this is not there
+
+** complete Actions class is importent in interview 
+
+
+Javascript executor:
+Javascript Executor is an interface in selenium webdriver
+
+executeScript() - We can execute Javascript statements.
+
+It throws one exception Element intercepted Exception.
+When call the method and it will not executed javascript code internally. Then above Exception Rised.
+ 
+We can use javascript executor in action methods like
+click() and sendKeys()
+
+** why we need javascript executor
+Some times click() not able to perform opertions in webpage
+then we can perform operation with out any action methods we can use javascript executor.
+
+* sendKeys():
+executeScript("arguments[0].setAttribute('value','Madhu')",variable);
+
+* click()
+executeScript("arguments[0].click()",variable)
+
+
+* Scrolling the page using javascript executor:
+
+This is not a webelement. this not part of webpage it gives on webpage size
+
+scrolling we can perform three ways by using javascript executor
+There are
+1. scroll down page by using pixel number
+	js.executeScript("Window.scrollBy(0,user value)", " ")
+ 
+2. scroll down page by using element and till element is visiable
+	js.executeScript("argument[0].scrollIntoView()",element)
+
+3. scroll down page by using till end of the page
+	js.executeScript("Window.scrollBy(0,document.body.scrollHeight)", " ")
+
+return howmany pixel value:
+ 	js.executeScript(" return Window.pageYOffset;")
+
+Scrolling upto intial position 
+	
+	js.executeScript("Window.scrollBy(0,-document.body.scrollHeight)", " ")
+
+* Zoom level
+Zoom level also we can perform operations by using javascript Executor
+	js.executeScript("document.body.style.zoom='50%'")
+
+document.body.style.zoom - is one of the expression used to zoom in and zoom out the webpage
+
+* uploading files:
+by using sendKeys() we can upload the files.
+
+
+* TakeScreenshot:
+How to capture screenshots:
+In before selenium 4 we have capture only full page after we capture perticular webelement
+we can capture screenshots in three ways:
+1. full page
+2. capture specific Section of the page
+3. capture the screenshot of Web Element
+
+getScreenshotAs - is method to capture the screenshot
+
+getScreenshotAs(OutputType.File)
+
+System.getProperty("user.dir")- is used to capture file path dyanamiclly
+
+sourcefile.renameTo(targetfile)- copy source file to target file
+
+getScreenshotAs() is a method in webelment interface also as TakesScreenshot interface.
+
+Every browser have some optionsclass
+ChromeOptions
+EdgeOptions
+FirefoxOptions
+
+ChromeOptions: is one of the class
+** 1. Headless testing:
+It means without seeing any ui actions the test execute the backend
+
+ChromeOptions options = new ChromeOptions()
+options.addArguments("--headless=new");
+
+Advantages:
+1. we can do multiple tasks (Since execution happend backend)
+2. Faster execution
+
+Disadvantage:
+1. user cannot see the actions on the page. so he cannot understand flow/functionality of the test.
+
+** 2. SSl Handling: SSl means secure socket layer
+ChromeOptions options = new ChromeOptions()
+options.setAcceptInsecureCerts(true);
+
+** 3. How to remove "Chrome is being controlled by automated test software"
+
+ChromeOptions options = new ChromeOptions()
+options.setExperimentalOption("excludeSwitches", new String[] {"enable-automation"});
+
+** 4. To run the tests in incoginito mode
+ChromeOptions options = new ChromeOptions()
+options.addArguments("--incognito");
+
+
+** 5. Enable extensions in browser
+
+ChromeOptions options = new ChromeOptions()
+File file = ne File(Path);
+options.addExtensions(file);
+
+
+** 6. Bloacking the ads
+
+ChromeOptions options = new ChromeOptions()
+File file = ne File(Path);
+options.addExtensions(file);
+
+How to bloack ads on the page:
+uBlock-origin
+Adbloker
+
+
+Broken Links:
+When click on the link it have some resources in server they give some response
+when click on the link it don't have any resources in server it gives status code
+Ex: 404 error
+It status code greaterthen equalto 400 then it is broken link.
+
+openConnection() - is one menthod it open conection to the server.
+
+
+Shadow DOM
